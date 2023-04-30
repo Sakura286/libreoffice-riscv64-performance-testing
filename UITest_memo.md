@@ -1,4 +1,3 @@
-
 # LibreOffice UITest 笔记
 
 需要准备好 libreoffice 的源代码，并将其编译完毕
