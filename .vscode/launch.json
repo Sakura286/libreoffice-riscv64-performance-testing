@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/infinity/Desktop/core/uitest/test_main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--soffice=path:/lib/libreoffice/program/soffice",
+                "--userdir=file:///tmp/libreoffice/4",
+                "--file=/home/infinity/Desktop/myuitest.py",
+            ],
+            "env": {
+                "PYTHONPATH": "/lib/libreoffice/program:/home/infinity/Desktop/core/unotest/source/python",
+                "URE_BOOTSTRAP": "file:///lib/libreoffice/program/fundamentalrc",
+                "SAL_USE_VCLPLUGIN": "gen",
+                "TDOC": "/home/infinity/Desktop/benchmark",
+                "TestUserDir": "file:///tmp",
+                "LC_ALL": "C",
+            },
+        }
+    ]
+}

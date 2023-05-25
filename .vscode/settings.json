@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./core/uitest",
+        ""
+    ],
+    "python.analysis.typeCheckingMode": "basic"
+}
