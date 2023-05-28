@@ -1,6 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./core/uitest",
+        "/home/infinity/Desktop/core/uitest",
         ""
     ],
     "python.analysis.typeCheckingMode": "basic"

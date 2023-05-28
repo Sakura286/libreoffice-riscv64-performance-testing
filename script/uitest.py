@@ -8,37 +8,48 @@ from tempfile import TemporaryDirectory
 import time
 import os.path
 
-DEFAULT_SLEEP = 0.05
 
-# TODO: add visible view of the results
-def time_record(item, test_time):
-    with open('test_result.txt', 'a') as file:
-        file.write('{0}\t{1:.3f}\n'.format(item, test_time))
-
-def trim_average(list_item):
-
-    max_value = max(list_item)
-    list_item.remove(max_value)
-
-    min_value = min(list_item)
-    list_item.remove(min_value)
-
-    return sum(list_item)/len(list_item)
-
-# arithmatic average
-def ari_average(list_item):
-    return sum(list_item)/len(list_item)
+class ExtFunc():
     
+    DEFAULT_SLEEP = 0.05
 
-# An opposite implement of wait_until_property_is_updated
-def wait_until_property_is_updated_custom(element, propertyName, value):
-    while True:
-        if get_state_as_dict(element)[propertyName] != value:
-            return
-        else:
-            time.sleep(DEFAULT_SLEEP)
+    # TODO: add visible view of the results
+    @staticmethod
+    def time_record(item, test_time):
+        with open('test_result.txt', 'a') as file:
+            file.write('{0}\t{1:.3f}\n'.format(item, test_time))
+
+    @staticmethod
+    def trim_average(list_item):
+
+        max_value = max(list_item)
+        list_item.remove(max_value)
+
+        min_value = min(list_item)
+        list_item.remove(min_value)
+
+        return sum(list_item)/len(list_item)
+
+    # arithmatic average
+    @staticmethod
+    def ari_average(list_item):
+        return sum(list_item)/len(list_item)
+        
+
+    # An opposite implement of wait_until_property_is_updated
+    @staticmethod
+    def wait_until_property_is_updated_custom(element, propertyName, value):
+        while True:
+            if get_state_as_dict(element)[propertyName] != value:
+                return
+            else:
+                time.sleep(ExtFunc.DEFAULT_SLEEP)
+
+
 
 class JustAUITest(UITestCase):
+
+
 
     # test LibreOffice writer with a silulation of daily office work
     # such as load a file, copy and paste, insert an image, save the doc,
@@ -57,7 +68,7 @@ class JustAUITest(UITestCase):
                 with self.ui_test.load_file(get_url_for_data_file('writer_doc_2.odt')):
                     load_end_time = time.time()
                     load_time += load_end_time - load_start_time
-                    time_record('load file', load_time)
+                    ExtFunc.time_record('load file', load_time)
 
                     # TODO: test doc and writerdoc diff
                     writer_doc = self.xUITest.getTopFocusWindow()
@@ -77,7 +88,7 @@ class JustAUITest(UITestCase):
                         save_start_time = time.time()
                     time.sleep(10)
                     while(not os.path.exists(save_path)):
-                            time.sleep(DEFAULT_SLEEP)
+                            time.sleep(ExtFunc.DEFAULT_SLEEP)
                     save_end_time = time.time()
                     list_save_time.append(save_end_time-save_start_time)
                     
@@ -89,14 +100,14 @@ class JustAUITest(UITestCase):
                         self.xUITest.executeCommand(".uno:Paste")
                         paste_end_time = time.time()
                         list_paste_time.append(paste_end_time-paste_start_time)
-                    time_record('paste',sum(list_paste_time))
+                    ExtFunc.time_record('paste',sum(list_paste_time))
                     
                     # save_1
                     modified_time = os.path.getmtime(save_path)
                     save_start_time=time.time()
                     self.xUITest.executeCommand('.uno:Save')
                     while(modified_time == os.path.getmtime(save_path)):
-                        time.sleep(DEFAULT_SLEEP)
+                        time.sleep(ExtFunc.DEFAULT_SLEEP)
                     save_end_time = time.time()
                     list_save_time.append(save_end_time-save_start_time)
 
@@ -127,18 +138,18 @@ class JustAUITest(UITestCase):
                             if get_state_as_dict(writer_edit)['AbsPosition'] != abs_position_value:
                                 break
                             else:
-                                time.sleep(DEFAULT_SLEEP)
+                                time.sleep(ExtFunc.DEFAULT_SLEEP)
                         
                         pic_end_time = time.time()
                         list_pic_time.append(pic_end_time-pic_start_time)
-                    time_record('insert pic',sum(list_pic_time))
+                    ExtFunc.time_record('insert pic',sum(list_pic_time))
                         
                     # save_2
                     save_start_time=time.time()
                     modified_time = os.path.getmtime(save_path)
                     self.xUITest.executeCommand('.uno:Save')
                     while(modified_time == os.path.getmtime(save_path)):
-                        time.sleep(DEFAULT_SLEEP)
+                        time.sleep(ExtFunc.DEFAULT_SLEEP)
                     save_end_time = time.time()
                     list_save_time.append(save_end_time-save_start_time)
 
@@ -153,19 +164,18 @@ class JustAUITest(UITestCase):
                                 writer_edit.executeAction("TYPE", mkPropertyValues({"TEXT" : one_char}))
 
                     # save_3
-
                     
                     modified_time = os.path.getmtime(save_path)
                     save_start_time=time.time()
                     self.xUITest.executeCommand('.uno:Save')
                     while(modified_time == os.path.getmtime(save_path)):
-                        time.sleep(DEFAULT_SLEEP)
+                        time.sleep(ExtFunc.DEFAULT_SLEEP)
                     save_end_time = time.time()
                     list_save_time.append(save_end_time-save_start_time)
 
                     ## since there is 4 time different saves, we do not need trim_average()
                     ## to remove the max and the min value.
-                    time_record('save', ari_average(list_save_time))
+                    ExtFunc.time_record('save', ExtFunc.ari_average(list_save_time))
 
                     # export pdf
                     # Export LOOPS times, remove the maximum and minnimum export time,
@@ -191,11 +201,11 @@ class JustAUITest(UITestCase):
                         ## the export process still works background.
                         ## So we need to detect if the file is already exported.
                         while(not os.path.exists(export_path)):
-                            time.sleep(DEFAULT_SLEEP)
+                            time.sleep(ExtFunc.DEFAULT_SLEEP)
                         pdf_end_time = time.time()
                         list_export_pdf_time.append(pdf_end_time-pdf_start_time)
 
-                    time_record('export pdf',trim_average(list_export_pdf_time))
+                    ExtFunc.time_record('export pdf', ExtFunc.trim_average(list_export_pdf_time))
     
 
 
@@ -216,7 +226,7 @@ class JustAUITest(UITestCase):
                 
                 list_calc_time.append(end_time-start_time)
                 
-        time_record("building_design", trim_average(list_calc_time))
+        ExtFunc.time_record("building_design", ExtFunc.trim_average(list_calc_time))
 
         list_calc_time = []
         for i in range(LOOPS):
@@ -228,6 +238,6 @@ class JustAUITest(UITestCase):
 
                 list_calc_time.append(end_time-start_time)
 
-        time_record("stocks_price", trim_average(list_calc_time))
+        ExtFunc.time_record("stocks_price", ExtFunc.trim_average(list_calc_time))
             
                         
