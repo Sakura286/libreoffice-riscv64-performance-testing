@@ -22,3 +22,13 @@
 ```xml
 <item oor:path="/org.openoffice.Office.Common/Security/Scripting"><prop oor:name="MacroSecurityLevel" oor:op="fuse"><value>0</value></prop></item>
 ```
+
+## 插入图片后脚本失去对窗口的控制
+
+要想连续插入图片，需要在对话框中点“OK”，然后按 ESDC
+
+图片是循环插入的，会出现图片插入后脚本对窗口失去控制的现象
+
+在图片插入后循环使用 get_state_as_dict() 方法查询 writer_edit 的各项属性，发现中途只有 AbsPosition 发生变化，于是尝试以 0.05s 的间隔查询该值，降低了该问题发生的频率
+
+推测有可能是因为图片插入没有完成，导致窗口的聚焦没有回到文本编辑区。
