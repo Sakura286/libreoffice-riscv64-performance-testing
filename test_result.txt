@@ -1,0 +1,4 @@
+building_design	0.666
+stocks_price	0.001
+load file	1.909
+paste	0.212

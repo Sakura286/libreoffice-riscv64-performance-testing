@@ -204,7 +204,6 @@ class JustAUITest(UITestCase):
     # then recalculate the average running time
 
     def test_calc(self):
-        return
         LOOPS = 10
 
         list_calc_time = []

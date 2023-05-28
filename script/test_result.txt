@@ -1,5 +1,0 @@
-load file	2.220
-paste	0.196
-insert pic	4.026
-save	2.955
-export pdf	3.155
