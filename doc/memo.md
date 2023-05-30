@@ -32,3 +32,28 @@
 在图片插入后循环使用 get_state_as_dict() 方法查询 writer_edit 的各项属性，发现中途只有 AbsPosition 发生变化，于是尝试以 0.05s 的间隔查询该值，降低了该问题发生的频率
 
 推测有可能是因为图片插入没有完成，导致窗口的聚焦没有回到文本编辑区。
+
+## lpi4a bug
+
+### 表格测试出错
+
+表格测试的时稳定出现 ERROR 错误
+
+首先确定发生时机：
+
+在执行 .uno:Calculate 前插入 sleep ，报错
+在执行 .uno:Calculate 后插入 sleep ，报错
+把 .uno:Calculate 去掉，报错
+去掉循环，报错
+
+也就是说，只要打开并关闭窗口，那么程序就会报错
+
+插入 print 函数进行观察，发现关闭窗口之前的语句可以正常执行，关闭之后的没有执行，可以确定是关闭窗口时出现了问题
+
+查阅[libreoffice buildd 记录](https://buildd.debian.org/status/package.php?p=libreoffice&suite=experimental)，发现几乎所有的 UIT(UI Test) 测试都炸掉了，报错都是在 ./framework/source/helper/ocomponentenumeration.cxx:83 抛出的 NoSuchElementException 异常上，上升到 uitest 的 python ，该异常是 IndexError
+
+这个错误的起因处理起来可能非常麻烦，因为 uitest 是基于 python 的，而这个错误很有可能发生在更深层的位置；另外，也有可能是因为 debian 打包的某些选项出了问题，如果要排查的话需要手动编译 libreoffice rv64 版本（
+
+TODO：修复 uitest 关闭窗口时的 ERROR 报错
+
+但是我们可以观察到这个错误只在关闭窗口时发生，也就是说它对于测试窗口内操作的性能是几乎没有影响的，所以我们可以换一个思路，跳过这个错误。具体在代码实现中，就是使用异常捕获来处理 IndexError 异常。
