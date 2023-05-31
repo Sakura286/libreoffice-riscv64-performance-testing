@@ -5,7 +5,7 @@ Some work of LibreOffice performance testing for riscv64 port, also work for oth
 
 ## News
 
-good news! There is only one order of magnitude difference between the performance of LibreOffice on TH1520 (left) and i7-12700kf (right) ~wink*
+Good news! There is only one order of magnitude difference between the performance of LibreOffice on TH1520 (left) and i7-12700kf (right) ~wink*
 
 ![some result](pic/2305312346.png)
 
