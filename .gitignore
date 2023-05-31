@@ -1,5 +1,7 @@
 
 script/__pycache__
 test_result.txt
+test_result.ods
 script/rvtest.py
 **.swp
+result/

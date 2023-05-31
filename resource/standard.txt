@@ -3,3 +3,5 @@ writer_save_doc 2.848
 writer_copy_paste   0.075
 writer_insert_image 0.952
 writer_export_pdf   1.832
+calc_load_BuildingDesign	0.722
+calc_load_StocksPriceTimeCorrelation	0.744
