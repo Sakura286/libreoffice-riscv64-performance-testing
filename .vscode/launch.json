@@ -14,7 +14,7 @@
             "args": [
                 "--soffice=path:/home/infinity/Desktop/core/instdir/program/soffice",
                 "--userdir=file:///tmp/libreoffice/4",
-                "--file=/home/infinity/Desktop/libreoffice-riscv64-performance-testing/script/uitest.py",
+                "--file=/home/infinity/Desktop/libreoffice-riscv64-performance-testing/script/rvtest.py",
             ],
             "env": {
                 "PYTHONPATH": "/home/infinity/Desktop/core/instdir/program:/home/infinity/Desktop/core/unotest/source/python:/home/infinity/Desktop/core/uitest/uitest",

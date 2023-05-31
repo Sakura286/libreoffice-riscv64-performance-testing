@@ -36,7 +36,7 @@
 
 但由于“打开 LibreOffice”往往是日常操作的第一步，所以依然需要统计这个时间
 
-load_doc = sum(T_1, T_2)
+writer_load_doc = sum(T_1, T_2)
 
 T_1 = T_load_witer_doc_1
 T_2 = T_load_writer_doc_2
@@ -45,7 +45,7 @@ T_2 = T_load_writer_doc_2
 
 由于采用 docx 存档中途会弹框提醒 msdoc 的版本问题，这个对话框难以获取与关闭，所以使用了 LibreOffice Writer 默认的 odt 文档格式
 
-save_doc = geomean(T_3, T_4, T,5, T_6)
+writer_save_doc = geomean(T_3, T_4, T,5, T_6)
 
 T_3 = T_writer_doc_save_as
 T_4 = T_writer_doc_save_1
@@ -56,7 +56,7 @@ T_6 = T_writer_doc_save_3
 
 粘贴的操作时间较快，所以取加和的效果更显著
 
-copy_paste = sum(T_7, ..., T_14)
+writer_copy_paste = sum(T_7, ..., T_14)
 
 T_7 = T_writer_doc_paste_1
 ...
@@ -64,22 +64,23 @@ T_14 = T_writer_doc_paste_8
 
 #### 插入图片
 
-insert_image = geomean(T_15, T_16, T_17, T_18)
+writer_insert_image = geomean(T_15, T_16, T_17, T_18, T_19)
 
 T_15 = T_writer_doc_insert_img_1
 T_16 = T_writer_doc_insert_img_2
 T_17 = T_writer_doc_insert_img_3
 T_18 = T_writer_doc_insert_img_4
+T_19 = T_writer_doc_insert_img_5
 
 #### 导出 pdf
 
-export_pdf = geomean(T_19, T,20, T_21, T_22, T_23)
+writer_export_pdf = geomean(T_20, T_21, T_22, T_23, T_24)
 
-T_19 = T_writer_doc_export_pdf_1
 T_20 = T_writer_doc_export_pdf_2
 T_21 = T_writer_doc_export_pdf_3
 T_22 = T_writer_doc_export_pdf_4
 T_23 = T_writer_doc_export_pdf_5
+T_24 = T_writer_doc_export_pdf_6
 
 ### 结果汇总
 
