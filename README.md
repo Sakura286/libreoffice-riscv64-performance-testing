@@ -22,7 +22,7 @@ cd libreoffice-riscv-port-memo
 # modify SRC_CODE_DIR to cloned source code
 vim run.sh
 chmod u+x run.sh
-./run.sh --source_dir ../core
+./run.sh
 ```
 
 ## Some memo
