@@ -19,7 +19,9 @@ export LC_ALL=C
 
 #rm -rf /tmp/libreoffice/4
 rm -f test_result.txt
+rm -f test_result.ods
 
 python3 "$SRC_CODE_DIR/uitest/test_main.py" --soffice=path:"$SRC_BIN_DIR/program/soffice"  --userdir=file:///tmp/libreoffice/4 --file=$SCRIPT_PATH/script/uitest.py
+python3 "$SRC_CODE_DIR/uitest/test_main.py" --soffice=path:"$SRC_BIN_DIR/program/soffice"  --userdir=file:///tmp/libreoffice/4 --file=$SCRIPT_PATH/script/show_result.py
 
 killall soffice.bin

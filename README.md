@@ -3,6 +3,12 @@
 
 Some work of LibreOffice performance testing for riscv64 port, also work for other arch on linux.
 
+## News
+
+Good news! There is only one order of magnitude difference between the performance of LibreOffice on TH1520 (left) and i7-12700kf (right) ~wink*
+
+![some result](pic/2305312346.png)
+
 ## How to run
 
 1. Before running the script, install and run libreoffice one time to close the everyday-tips.
@@ -16,7 +22,7 @@ cd libreoffice-riscv-port-memo
 # modify SRC_CODE_DIR to cloned source code
 vim run.sh
 chmod u+x run.sh
-./run.sh --source_dir ../core
+./run.sh
 ```
 
 ## Some memo

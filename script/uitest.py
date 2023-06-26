@@ -19,7 +19,7 @@ class ExtFunc():
 
     @staticmethod
     def Time_Record(item, test_time):
-        ExtFunc.Write('Item: {0}\t{1:.3f}\n'.format(item, test_time))
+        ExtFunc.Write('Item: {0} {1:.3f}\n'.format(item, test_time))
 
     @staticmethod
     def Trim_Average(list_item):
@@ -57,7 +57,7 @@ class JustAUITest(UITestCase):
     # such as load a file, copy and paste, insert an image, save the doc,
     # export to pdf
     def test_writer(self):
-        ExtFunc.Write('Case: Writer - Common Test')
+        ExtFunc.Write('Case: Writer - Common Test\n')
         try:
             with TemporaryDirectory() as tempdir:
                 load_start_time = time.time()
@@ -207,13 +207,13 @@ class JustAUITest(UITestCase):
     # then recalculate the average running time
 
     def test_calc(self):
-        ExtFunc.Write('Case: Calc - Common Test')
+        ExtFunc.Write('Case: Calc - Load Test\n')
         LOOPS = 5
         for filename in ['BuildingDesign.xls','StocksPriceTimeCorrelation.xls']:
             list_calc_time = []
             for i in range(LOOPS):
                 try:
-                    with self.ui_test.load_file(get_url_for_data_file('BuildingDesign.xls')):
+                    with self.ui_test.load_file(get_url_for_data_file(filename)):
 
                         start_time = time.time()
                         self.xUITest.executeCommand(".uno:Calculate")
@@ -224,7 +224,7 @@ class JustAUITest(UITestCase):
                     print('Test Message: IndexError Captured. This exception is common in riscv64.')
                     print('Test Message: This does not handicap our test. Continue.....')
                     
-            ExtFunc.Time_Record('Calc_Load_'+filename[: filename.find('.')], ExtFunc.Trim_Average(list_calc_time))
+            ExtFunc.Time_Record('calc_load_'+filename[: filename.find('.')], ExtFunc.Trim_Average(list_calc_time))
 
             
                         
