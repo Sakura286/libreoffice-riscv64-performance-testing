@@ -17,14 +17,13 @@ Some work of LibreOffice performance testing for riscv64 port, also work for oth
 |Calc_load_BuildingDesign|35.503|23.213|1.387|6.645|
 |Calc_load_StocksPriceTimeCorrelation|43.768|21.693|1.462|7.649|
 
-
-
 ## How to run
 
 1. Before running the script, install and run libreoffice one time to close the everyday-tips.
 2. run the commands below:
 
 ```shell
+# souce code downloaded in "core" folder
 git clone --depth=1 git://go.suokunlong.cn/lo/core
 git clone --depth=1 https://github.com/Sakura286/libreoffice-riscv-port-memo.git
 cd libreoffice-riscv-port-memo
@@ -33,6 +32,17 @@ cd libreoffice-riscv-port-memo
 vim run.sh
 chmod u+x run.sh
 ./run.sh
+
+# meet "macros" dialog, stop the script
+
+# according to doc/memo.md
+# add "<item oor:path="/org.openoffice.Office.Common/Security/Scripting"><prop oor:name="MacroSecurityLevel" oor:op="fuse"><value>0</value></prop></item>"
+# to registrymodifications.xcu
+vim /tmp/libreoffice/4/usr/registrymodifications.xcu
+
+# run again
+./run.sh
+
 ```
 
 ## Some memo
